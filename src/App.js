@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import data, { getAirlineById, getAirportByCode } from './data'
 
+// const Table = ({ className, columns, rows, format }) => {
+
+// }
+
 const App = () => (
   <div className="app">
   <header className="header">
@@ -12,17 +16,27 @@ const App = () => (
       Welcome to the app!
     </p>
   </section>
-  <ul>
-    {data.routes.map(route => {
-     return (
-        <li key={route.airline+route.src+route.dest}>
-          {getAirlineById(route.airline)} | 
-          {getAirportByCode(route.src)} | 
-          {getAirportByCode(route.dest)}
-        </li>
-      )
-    })}
-  </ul>
+  <table>
+  {/* key={route.airline+route.src+route.dest} */}
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Origin</th>
+        <th>Destination</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.routes.map(route => {
+      return (
+          <tr>
+            <td>{getAirlineById(route.airline)}</td>
+            <td>{getAirportByCode(route.src)}</td> 
+            <td>{getAirportByCode(route.dest)}</td>
+          </tr>
+        )
+      })}
+    </tbody>
+  </table>
 </div>
 )
 
