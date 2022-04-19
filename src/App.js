@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import data from './data'
+import data, { getAirlineById, getAirportByCode } from './data'
 
 const App = () => (
   <div className="app">
@@ -13,7 +13,15 @@ const App = () => (
     </p>
   </section>
   <ul>
-    {data.routes.map(route => <li>{route.airline} | {route.src} | {route.dest}</li>)}
+    {data.routes.map(route => {
+     return (
+        <li key={route.airline+route.src+route.dest}>
+          {getAirlineById(route.airline)} | 
+          {getAirportByCode(route.src)} | 
+          {getAirportByCode(route.dest)}
+        </li>
+      )
+    })}
   </ul>
 </div>
 )

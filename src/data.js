@@ -1,3 +1,11 @@
+export const getAirlineById = (id) => {
+  return airlines.filter(airline => airline.id === id)[0].name
+}
+
+export const getAirportByCode = (code) => {
+  return airports.filter(ap => ap.code === code)[0].name
+}
+
 const routes = [
   {"airline":24,"src":"DFW","dest":"XNA"},
   {"airline":24,"src":"DFW","dest":"FWA"},
