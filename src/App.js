@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import data, { getAirlineById, getAirportByCode } from './data'
 import Table from './components/Table'
 import Select from './components/Select';
-import { uniqueID } from './utils'
 
 const columns = [
   {name: 'Airline', property: 'airline'},

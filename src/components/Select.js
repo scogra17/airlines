@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { uniqueID } from '../utils';
+import React from 'react';
 
 const Select = ({ 
   options,
@@ -7,13 +6,9 @@ const Select = ({
   titleKey = "name",
   allTitle = "All Airlines",
   onSelect,
-  selected = null,
   value = "all"
 }) => {
-  const handleChange = (e) => {
-    e.preventDefault()
-    onSelect(e.target.value)
-  }
+  const handleChange = (e) => onSelect(e.target.value)
   
   return (
     <div>
@@ -23,7 +18,7 @@ const Select = ({
         {options.map(airline => {
           return (
             <option 
-              key={airline}
+              key={airline[valueKey]}
               value={airline[valueKey]}
             >
               {airline[titleKey]}
