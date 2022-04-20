@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { uniqueID } from '../utils';
 
 const rowsToDispay = (values, startIdx, count) => {
   return values.slice(startIdx, startIdx+count)
@@ -27,13 +28,13 @@ const Table = ({ className, columns, rows, format, perPage=25 }) => {
       <table className={className}>
         <thead>
           <tr>
-            {columns.map(heading => <th>{heading.name}</th>)}
+            {columns.map(heading => <th key={uniqueID()}>{heading.name}</th>)}
           </tr>
         </thead>
         <tbody>
           {rowsToDispay(rows, startIdx, perPage).map(route => {
           return (
-              <tr>
+              <tr key={uniqueID()}>
                 <td>{format("airline", route.airline)}</td>
                 <td>{format("src", route.src)}</td> 
                 <td>{format("dest", route.dest)}</td>
