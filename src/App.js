@@ -39,6 +39,10 @@ const App = () => {
 
   const handleFilterRoutesByAirline = (airline) => setAirlineFilter(airline)
   const handleFilterRoutesByAirport = (airport) => setAirportFilter(airport)
+  const handleClearFilters = () => {
+    setAirlineFilter("all")
+    setAirportFilter("all")
+  }
 
   return (
     <div className="app">
@@ -68,6 +72,7 @@ const App = () => {
         value={airportFilter}
         label="Filter by airport"
       />
+      <button onClick={handleClearFilters}>Clear filters</button>
       <Table 
         className="routes-table" 
         columns={columns} 
