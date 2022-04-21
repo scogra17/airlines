@@ -2,26 +2,27 @@ import React from 'react';
 
 const Select = ({ 
   options,
-  valueKey = "id",
-  titleKey = "name",
-  allTitle = "All Airlines",
+  valueKey = "",
+  titleKey = "",
+  allTitle = "",
   onSelect,
-  value = "all"
+  value = "",
+  label = ""
 }) => {
   const handleChange = (e) => onSelect(e.target.value)
   
   return (
     <div>
-      <label for="airlines">Filter by airline:</label>
+      <label for="airlines">{label}</label>
       <select id="airlines" name="airlines" value={value} onChange={handleChange}>
         <option key="all" value="all">{allTitle}</option>
-        {options.map(airline => {
+        {options.map(option => {
           return (
             <option 
-              key={airline[valueKey]}
-              value={airline[valueKey]}
+              key={option[valueKey]}
+              value={option[valueKey]}
             >
-              {airline[titleKey]}
+              {option[titleKey]}
             </option>
           )
         })}

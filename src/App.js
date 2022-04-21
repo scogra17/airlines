@@ -14,6 +14,7 @@ const formatValue = (property, value) => {
   switch (property) {
     case "airline":
       return getAirlineById(value)
+    case "dest":
     case "src":
       return getAirportByCode(value)
     default: 
@@ -23,17 +24,21 @@ const formatValue = (property, value) => {
 
 const App = () => {
   const [airlineFilter, setAirlineFilter] = useState("all")
+  const [airportFilter, setAirportFilter] = useState("all")
   const [filteredAirlines, setFilteredAirlines] = useState(data.routes)
 
-  const filterAirlines = () => {
-    setFilteredAirlines(data.routes.filter(route => airlineFilter === "all" || route.airline === Number(airlineFilter)))
+  const filterRoutes = () => {
+    const filteredRoutes = data.routes.filter(route => {
+      return (airlineFilter === "all" || route.airline === Number(airlineFilter)) &&
+        (airportFilter === "all" || route.src === airportFilter)
+    })
+    setFilteredAirlines(filteredRoutes)
   }
 
-  useEffect(filterAirlines, [airlineFilter])
+  useEffect(filterRoutes, [airlineFilter, airportFilter])
 
-  const handleFilterByAirline = (airline) => {
-    setAirlineFilter(airline) 
-  }
+  const handleFilterRoutesByAirline = (airline) => setAirlineFilter(airline)
+  const handleFilterRoutesByAirport = (airport) => setAirportFilter(airport)
 
   return (
     <div className="app">
@@ -45,8 +50,30 @@ const App = () => {
           Welcome to the app!
         </p>
       </section>
-      <Select options={data.airlines} onSelect={handleFilterByAirline} value={airlineFilter}/>
-      <Table className="routes-table" columns={columns} rows={filteredAirlines} format={formatValue}/>
+      <Select 
+        options={data.airlines} 
+        valueKey="id"
+        titleKey="name"
+        allTitle="All Airlines"
+        onSelect={handleFilterRoutesByAirline} 
+        value={airlineFilter}
+        label="Filter by airline"
+      />
+      <Select 
+        options={data.airports} 
+        valueKey="code"
+        titleKey="name"
+        allTitle="All Airports"
+        onSelect={handleFilterRoutesByAirport} 
+        value={airportFilter}
+        label="Filter by airport"
+      />
+      <Table 
+        className="routes-table" 
+        columns={columns} 
+        rows={filteredAirlines} 
+        format={formatValue}
+      />
     </div>
   )
 }
