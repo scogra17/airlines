@@ -14,7 +14,7 @@ body {
   font-size: 1.5em;
 }
 
-section {
+section, .navigation {
   text-align: center;
 }
 
@@ -29,7 +29,7 @@ table.routes-table {
   text-align: left;
 }
 
-.routes-table td {
+.routes-table td, {
   padding: .25rem;
   border: none;
 }

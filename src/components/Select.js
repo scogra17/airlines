@@ -2,6 +2,7 @@ import React from 'react';
 
 const Select = ({ 
   options,
+  enabledOptions,
   valueKey = "",
   titleKey = "",
   allTitle = "",
@@ -21,6 +22,7 @@ const Select = ({
             <option 
               key={option[valueKey]}
               value={option[valueKey]}
+              disabled={!enabledOptions[option[valueKey]]}
             >
               {option[titleKey]}
             </option>

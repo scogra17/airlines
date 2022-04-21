@@ -21,9 +21,6 @@ const Table = ({ className, columns, rows, format, perPage=25 }) => {
 
   return (
     <div>
-      <p>Showing {startIdx} - {startIdx + perPage} of {rows.length} total routes</p>
-      <button onClick={handleLoadPreviousPage}>Previous Page</button>
-      <button onClick={handleLoadNextPage}>Next Page</button>
       <table className={className}>
         <thead>
           <tr>
@@ -42,6 +39,11 @@ const Table = ({ className, columns, rows, format, perPage=25 }) => {
           })}
         </tbody>
       </table>
+      <div className="navigation">
+        <p>Showing {startIdx} - {startIdx + perPage} of {rows.length} total routes</p>
+        <button onClick={handleLoadPreviousPage}>Previous Page</button>
+        <button onClick={handleLoadNextPage}>Next Page</button>
+      </div>
     </div>
   )
 }

@@ -30,7 +30,7 @@ const App = () => {
   const filterRoutes = () => {
     const filteredRoutes = data.routes.filter(route => {
       return (airlineFilter === "all" || route.airline === Number(airlineFilter)) &&
-        (airportFilter === "all" || route.src === airportFilter)
+        (airportFilter === "all" || route.src === airportFilter || route.dest === airportFilter )
     })
     setFilteredAirlines(filteredRoutes)
   }
@@ -44,6 +44,23 @@ const App = () => {
     setAirportFilter("all")
   }
 
+  const filteredAirlineOptions = () => {
+    let airlineOptions= {}
+    filteredAirlines.forEach(route => {
+      airlineOptions[route.airline] = true
+    })
+    return airlineOptions
+  }
+
+  const filteredAirportOptions = () => {
+    let airportOptions = {}
+    filteredAirlines.forEach(route => {
+      airportOptions[route.src] = true
+      airportOptions[route.dest] = true
+    })
+    return airportOptions
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -55,7 +72,8 @@ const App = () => {
         </p>
       </section>
       <Select 
-        options={data.airlines} 
+        options={data.airlines}
+        enabledOptions={filteredAirlineOptions()}
         valueKey="id"
         titleKey="name"
         allTitle="All Airlines"
@@ -65,6 +83,7 @@ const App = () => {
       />
       <Select 
         options={data.airports} 
+        enabledOptions={filteredAirportOptions()}
         valueKey="code"
         titleKey="name"
         allTitle="All Airports"
@@ -72,7 +91,7 @@ const App = () => {
         value={airportFilter}
         label="Filter by airport"
       />
-      <button onClick={handleClearFilters}>Clear filters</button>
+      <button onClick={handleClearFilters}>Show all routes</button>
       <Table 
         className="routes-table" 
         columns={columns} 
